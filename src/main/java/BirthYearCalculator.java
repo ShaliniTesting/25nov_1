@@ -15,7 +15,7 @@ import java.time.Year;
  * <p>Usage example:</p>
  * <pre>{@code
  *     int birthYear = BirthYearCalculator.calculateBirthYear(30);
- *     // If current year is 2026, birthYear will be 1996
+ *     // birthYear will be currentYear - 30
  * }</pre>
  *
  * @see java.time.Year
@@ -62,8 +62,8 @@ public class BirthYearCalculator {
         int currentYear = Year.now().getValue();
 
         // Calculate the birth year by subtracting the user's age from the current year.
-        // For example, if the current year is 2026 and the user is 30 years old,
-        // the estimated birth year is 2026 - 30 = 1996.
+        // For example, if the user is 30 years old, the estimated birth year
+        // is currentYear - 30 (e.g., the current year minus the age).
         int birthYear = currentYear - age;
 
         return birthYear;
@@ -112,8 +112,8 @@ public class BirthYearCalculator {
             birthYear = currentYear - age;
         } else {
             // Birthday has NOT yet occurred this year — adjust by subtracting one more year.
-            // Example: current year 2026, age 30, birthday in December (not yet occurred in February)
-            // → actual birth year is 2026 - 30 - 1 = 1995, not 1996.
+            // Example: age 30, birthday in December (not yet occurred)
+            // → actual birth year is currentYear - 30 - 1, not currentYear - 30.
             birthYear = currentYear - age - 1;
         }
 

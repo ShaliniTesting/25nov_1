@@ -156,8 +156,8 @@ class BirthYearCalculatorTest {
      * this calendar year. In this case, the standard subtraction applies:
      * {@code currentYear - age}.
      *
-     * <p>Example: If the current year is 2026 and a 30-year-old's birthday was in January
-     * (already passed), they were born in 2026 - 30 = 1996.</p>
+     * <p>Example: If a 30-year-old's birthday was in January (already passed),
+     * they were born in currentYear - 30.</p>
      *
      * Expected result: {@code CURRENT_YEAR - 30}.
      */
@@ -176,8 +176,8 @@ class BirthYearCalculatorTest {
      * this calendar year. In this case, the user was actually born one year earlier
      * than the simple subtraction suggests: {@code currentYear - age - 1}.
      *
-     * <p>Example: If the current year is 2026 and a 30-year-old's birthday is in December
-     * (not yet passed in February), they were born in 2026 - 30 - 1 = 1995, not 1996.</p>
+     * <p>Example: If a 30-year-old's birthday is in December (not yet passed),
+     * they were born in currentYear - 30 - 1, not currentYear - 30.</p>
      *
      * Expected result: {@code CURRENT_YEAR - 30 - 1}.
      */

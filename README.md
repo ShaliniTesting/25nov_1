@@ -102,6 +102,7 @@ The application validates all user input before performing any calculation:
 | **Negative numbers** (e.g., `-5`) | Rejected with an error message prompting for a valid positive age |
 | **Zero** (`0`) | Rejected with an error message — age must be a positive integer |
 | **Non-numeric input** (e.g., `abc`) | Caught via `InputMismatchException`; displays a meaningful error and does not crash |
+| **Ages above 150** (e.g., `200`) | Rejected with error message prompting for a realistic age (1-150) |
 
 The program never crashes due to invalid input — all exceptions are explicitly caught and handled with user-friendly error messages.
 

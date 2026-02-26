@@ -26,7 +26,7 @@ import java.util.InputMismatchException;
  * <pre>{@code
  *     java Main
  *     Enter your age: 30
- *     If you are 30 years old, you were born in 1996.
+ *     If you are 30 years old, you were born in [birth year].
  *     Would you like to calculate again? (yes/no): no
  *     Goodbye!
  * }</pre>
