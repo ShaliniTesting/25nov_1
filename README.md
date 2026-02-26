@@ -70,12 +70,6 @@ After building the project, run the application using:
 java -cp target/classes Main
 ```
 
-Alternatively, if the Maven Exec plugin is configured:
-
-```bash
-mvn exec:java -Dexec.mainClass="Main"
-```
-
 ---
 
 ## Usage Example
@@ -108,7 +102,6 @@ The application validates all user input before performing any calculation:
 | **Negative numbers** (e.g., `-5`) | Rejected with an error message prompting for a valid positive age |
 | **Zero** (`0`) | Rejected with an error message — age must be a positive integer |
 | **Non-numeric input** (e.g., `abc`) | Caught via `InputMismatchException`; displays a meaningful error and does not crash |
-| **Unreasonably large ages** | Handled gracefully with appropriate feedback |
 
 The program never crashes due to invalid input — all exceptions are explicitly caught and handled with user-friendly error messages.
 

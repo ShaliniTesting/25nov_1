@@ -23,6 +23,15 @@ import java.time.Year;
 public class BirthYearCalculator {
 
     /**
+     * Private constructor to prevent instantiation of this utility class.
+     * All methods in this class are static and should be accessed directly
+     * via the class name (e.g., {@code BirthYearCalculator.calculateBirthYear(25)}).
+     */
+    private BirthYearCalculator() {
+        // Prevent instantiation — this is a static utility class
+    }
+
+    /**
      * Calculates the estimated birth year based on the given age.
      *
      * <p>This method retrieves the current year dynamically using
