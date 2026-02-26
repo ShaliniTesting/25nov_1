@@ -68,6 +68,11 @@ public class Main {
             // Pre-check whether the next token in the input stream is a valid integer.
             // If not, display an error message and restart the loop immediately.
             if (!scanner.hasNextInt()) {
+                // Check if stdin is exhausted (EOF/pipe closed) — if so, exit gracefully.
+                // This prevents NoSuchElementException when running with piped or redirected input.
+                if (!scanner.hasNext()) {
+                    break;
+                }
                 System.out.println("Invalid input. Please enter a valid number.");
                 // Consume the invalid (non-integer) token to prevent an infinite loop
                 scanner.next();
@@ -84,15 +89,21 @@ public class Main {
             } catch (InputMismatchException e) {
                 // Safety-net: handle any unexpected non-numeric input that bypassed hasNextInt()
                 System.out.println("Invalid input. Please enter a valid number.");
-                // Consume the invalid token to clear the scanner buffer
-                scanner.next();
+                // Consume the invalid token to clear the scanner buffer, if available.
+                // Guard with hasNext() to prevent NoSuchElementException on stdin EOF.
+                if (scanner.hasNext()) {
+                    scanner.next();
+                }
                 continue;
             }
 
             // Consume the trailing newline character left in the buffer after nextInt().
             // This prevents the newline from being inadvertently read by subsequent
             // nextLine() calls (e.g., the continue/exit prompt).
-            scanner.nextLine();
+            // Guard with hasNextLine() to prevent NoSuchElementException on stdin EOF.
+            if (scanner.hasNextLine()) {
+                scanner.nextLine();
+            }
 
             // --- Input Validation: Reject negative numbers ---
             // A negative age is not meaningful for birth year calculation.
@@ -109,6 +120,15 @@ public class Main {
                 continue;
             }
 
+            // --- Input Validation: Reject unreasonably large ages ---
+            // Prevent integer overflow in birth year calculation by capping age at
+            // a realistic maximum. The oldest verified human lived to 122 years;
+            // 150 provides a generous upper bound while preventing overflow.
+            if (age > 150) {
+                System.out.println("Invalid input. Please enter a realistic age (1-150).");
+                continue;
+            }
+
             // --- Calculation: Delegate to BirthYearCalculator ---
             // Call the reusable static calculation method to compute the birth year.
             // BirthYearCalculator uses java.time.Year.now() internally to retrieve the
@@ -122,6 +142,12 @@ public class Main {
 
             // --- Continue Prompt: Ask if the user wants to perform another calculation ---
             System.out.print("Would you like to calculate again? (yes/no): ");
+
+            // Guard against NoSuchElementException when stdin is exhausted (piped/redirected input).
+            // If no more input is available, exit the loop gracefully instead of crashing.
+            if (!scanner.hasNextLine()) {
+                break;
+            }
             String response = scanner.nextLine().trim();
 
             // If the user enters anything other than "yes" (case-insensitive), exit the loop.
