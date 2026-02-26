@@ -115,7 +115,7 @@ This project adheres to the following technical constraints and design decisions
 - **Modern API only** — Uses `java.time.Year` exclusively for current year retrieval. The deprecated `java.util.Date` and `java.util.Calendar` APIs are **never** used.
 - **No hardcoded year** — The current year is always retrieved dynamically at runtime via `Year.now().getValue()`.
 - **Explicit exception handling** — Every potential exception path is caught and handled with a meaningful error message. The application never terminates unexpectedly from user input.
-- **Clean code principles** — Descriptive variable names (`userAge`, `birthYear`, `currentYear`), comprehensive comments explaining logic, and adherence to the Single Responsibility Principle (SRP).
+- **Clean code principles** — Descriptive variable names (`age`, `birthYear`, `currentYear`), comprehensive comments explaining logic, and adherence to the Single Responsibility Principle (SRP).
 - **Separation of concerns** — `Main.java` handles I/O; `BirthYearCalculator.java` handles computation. The calculator class is independently testable without console dependencies.
 
 ---
